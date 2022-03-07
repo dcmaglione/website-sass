@@ -1,0 +1,82 @@
+// FONTS -----------------------------------------------
+// Google Fonts
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500;700&family=Merriweather:ital@0;1&family=Montserrat&family=Ubuntu+Mono&display=swap');
+
+// Font Variables
+$merriweather: 'Merriweather', serif;
+$inter: 'Inter', sans-serif;
+$montserrat: 'Montserrat', sans-serif;
+$ubuntu: 'Ubuntu Mono', monospace;
+
+// COLOR THEMES ----------------------------------------
+// Universal
+$accent-primary: #5e81ac;
+$accent-secondary: #81a1c1;
+
+// Light Theme
+$bg-primary-light: #eceff4;
+$bg-secondary-light: #e5e9f0;
+$text-primary-light: #2e3440;
+$text-secondary-light: #3b4252;
+
+// Dark Theme
+$bg-primary-dark: #2e3440;
+$bg-secondary-dark: #3b4252;
+$text-primary-dark: #eceff4;
+$text-secondary-dark: #e5e9f0;
+
+// Theme Config
+$themes: (
+  light: (
+    bg-primary: $bg-primary-light,
+    bg-secondary: $bg-secondary-light,
+    text-primary: $text-primary-light,
+    text-secondary: $text-secondary-light,
+  ),
+  dark: (
+    bg-primary: $bg-primary-dark,
+    bg-secondary: $bg-secondary-dark,
+    text-primary: $text-primary-dark,
+    text-secondary: $text-secondary-dark,
+  ),
+);
+
+// CHANGE THEME ----------------------------------------
+@mixin themed() {
+  @each $theme, $map in $themes {
+    .theme--#{$theme} & {
+      $theme-map: () !global;
+      @each $key, $submap in $map {
+        $value: map-get(map-get($themes, $theme), '#{$key}');
+        $theme-map: map-merge(
+          $theme-map,
+          (
+            $key: $value,
+          )
+        ) !global;
+      }
+      @content;
+      $theme-map: null !global;
+    }
+  }
+}
+
+@function t($key) {
+  @return map-get($theme-map, $key);
+}
+
+// DEFAULT VALUES --------------------------------------
+body {
+  background-color: $bg-primary-light;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
