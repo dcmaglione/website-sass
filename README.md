@@ -1,4 +1,4 @@
-# website 
+# website-sass
 New personal website built using ReactJS and Sass over Spring '22. This repository contains all source files for the website. 
 
 ## Description
