@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/home.scss';
+import '../scss/home.scss';
 
 // Icon Imports
 import { FiGithub, FiLinkedin, FiMail, FiFileText } from 'react-icons/fi';
